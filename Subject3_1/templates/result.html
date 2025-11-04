@@ -1,1 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Result</title>
+</head>
+<body>
+    <h2>Submission Result</h2>
+
+    <dl>
+        <dt>Name</dt>
+        <dd>{{ name }}</dd>
+
+        <dt>Student Number</dt>
+        <dd>{{ student_number }}</dd>
+
+        <dt>Major</dt>
+        <dd>{{ major }}</dd>
+
+        <dt>Gender</dt>
+        <dd>{{ gender }}</dd>
+
+        <dt>Programming Languages</dt>
+        <dd>
+            {% if languages %}
+                {{ languages | join(", ") }}
+            {% else %}
+                선택 없음
+            {% endif %}
+        </dd>
+    </dl>
+
+    <p><a href="{{ url_for('index') }}">돌아가기</a></p>
+</body>
+</html>
 
