@@ -1,1 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Input</title>
+</head>
+<body>
+    <h2>Student Information Form</h2>
+
+    <!-- Flash 메시지 출력 -->
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul>
+          {% for msg in messages %}
+            <li style="color:red;">{{ msg }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+
+    <form method="POST" action="/result">
+        <div>
+            <label for="name">Name :</label>
+            <input id="name" type="text" name="name" placeholder="이름 입력" required>
+        </div>
+
+        <div>
+            <label for="student_id">Student Number :</label>
+            <input id="student_id" type="text" name="StudentNumber" placeholder="학번 입력" required>
+        </div>
+
+        <div>
+            <label for="major">Major :</label>
+            <input id="major" type="text" name="Major" placeholder="전공 입력" required>
+        </div>
+
+        <fieldset>
+            <legend>Gender</legend>
+            <label><input type="radio" name="gender" value="M" required> 남</label>
+            <label><input type="radio" name="gender" value="F"> 여</label>
+        </fieldset>
+
+        <fieldset>
+            <legend>Programming Languages (복수 선택 가능)</legend>
+            <label><input type="checkbox" name="languages" value="Python"> Python</label>
+            <label><input type="checkbox" name="languages" value="Java"> Java</label>
+            <label><input type="checkbox" name="languages" value="HTML"> HTML</label>
+            <label><input type="checkbox" name="languages" value="C++"> C++</label>
+        </fieldset>
+
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
 
