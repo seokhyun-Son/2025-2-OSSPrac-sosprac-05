@@ -1,1 +1,16 @@
+{% extends "base.html" %}
 
+{% block content %}
+    <h1>📞 연락하기</h1>
+    <p>우리 팀에게 궁금한 점을 남겨주세요.</p>
+
+    <form action="/contact" method="POST">
+        <label for="email">회신받을 이메일:</label>
+        <input type="email" id="email" name="email" required>
+        
+        <label for="message">문의 내용:</label>
+        <textarea id="message" name="message" rows="5" required></textarea>
+        
+        <button type="submit">전송하기</button>
+    </form>
+{% endblock %}
