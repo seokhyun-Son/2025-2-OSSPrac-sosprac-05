@@ -1,1 +1,16 @@
+{% extends "base.html" %}
 
+{% block content %}
+    <h1>🎉 05-sosprac 팀을 소개합니다</h1>
+    <hr>
+    
+    {% for member in members %}
+        <div class="card">
+            <h3>{{ member.name }}</h3>
+            <strong>역할:</strong> {{ member.role }} <br>
+            <strong>한마디:</strong> "{{ member.motto }}"
+        </div>
+    {% else %}
+        <p>아직 팀원이 없습니다.</p>
+    {% endfor %}
+{% endblock %}
