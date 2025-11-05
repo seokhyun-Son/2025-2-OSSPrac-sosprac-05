@@ -1,1 +1,12 @@
+{% extends "base.html" %}
 
+{% block content %}
+    <h1>{{ title }}</h1>
+    
+    <div class="card">
+        <p>{{ message }}</p>
+    </div>
+    
+    <br>
+    <a href="/">→ 홈으로 돌아가기</a>
+{% endblock %}
