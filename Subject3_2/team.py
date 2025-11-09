@@ -37,6 +37,26 @@ def index():
 def input_page():
     return render_template('input.html')
 
+# 김지훈 소개 홈페이지
+@app.route('/kimjihun')
+def kimjihun():
+    return render_template('kimjihun.html')
+
+# 장승열 소개 홈페이지
+@app.route('/jang')
+def jang():
+    return render_template('jang.html')
+
+# 나서윤 소개 홈페이지
+@app.route('/na')
+def na():
+    return render_template('na.html')
+
+# 손석현 소개 홈페이지
+@app.route('/son')
+def son():
+    return render_template('son.html')
+
 # 3. '/result' (결과 처리) 수정
 @app.route('/result', methods=['POST'])
 def result():

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>팀장 김지훈 소개</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body.profile-page {
+            font-family: 'Noto Sans KR', sans-serif;
+            background: linear-gradient(120deg, #a8c0ff, #3f2b96);
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .profile-container {
+            background-color: #ffffff;
+            width: 800px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            display: flex;
+            flex-direction: row;
+            overflow: hidden;
+        }
+
+        .left-section {
+            background: linear-gradient(180deg, #4e8edc, #a8c0ff);
+            color: white;
+            width: 35%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 30px 15px;
+        }
+
+        .left-section img {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #fff;
+            margin-bottom: 15px;
+        }
+
+        .left-section h2 {
+            margin: 10px 0 5px;
+            font-size: 1.6em;
+        }
+
+        .left-section p {
+            font-style: italic;
+            font-size: 1em;
+        }
+
+        .right-section {
+            width: 65%;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .info-block {
+            margin-bottom: 25px;
+        }
+
+        .info-block h3 {
+            margin-bottom: 10px;
+            color: #3f2b96;
+            font-size: 1.2em;
+            border-left: 4px solid #3f2b96;
+            padding-left: 10px;
+        }
+
+        .info-block p {
+            margin: 5px 0;
+            line-height: 1.6em;
+        }
+
+        .contact {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .contact a {
+            text-decoration: none;
+            color: #3f2b96;
+            font-weight: bold;
+        }
+
+        .contact a:hover {
+            text-decoration: underline;
+        }
+
+        .back-link {
+            text-align: right;
+            font-weight: bold;
+            color: #3f2b96;
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body class="profile-page">
+    <div class="profile-container">
+        <div class="left-section">
+            <img src="https://via.placeholder.com/150" alt="팀장 프로필 사진">
+            <h2>김지훈</h2>
+            <p>"운동하기"</p>
+        </div>
+
+        <div class="right-section">
+            <div class="info-block">
+                <h3>👋 자기소개</h3>
+                <p>안녕하세요! 팀장 김지훈입니다. 산업시스템공학과와 데이터사이언스를 전공하고 있습니다. 
+                잘 부탁드립니다.</p>
+            </div>
+
+            <div class="info-block">
+                <h3>💡 취미</h3>
+                <p>~~~~~~~</p>
+            </div>
+
+            <div class="info-block">
+                <h3> 포부 </h3>
+                <ul>
+                    <li>~~~</li>
+                    <li>!!!!!!</li>
+                    <li>@@@@@@@@@</li>
+                </ul>
+            </div>
+
+            <div class="info-block contact">
+                <h3>📞 연락처</h3>
+                <p>📧 <a href="mailto:zihun3069@dgu.ac.kr">zihun3069@dgu.ac.kr</a></p>
+                <p>📱 010-8654-3069</p>
+                <p>🐱 <a href="https://github.com/jihun-3069" target="_blank">@jihun-3069</a></p>
+            </div>
+
+            <a href="{{ url_for('index') }}" class="back-link">← 팀 소개로 돌아가기</a>
+        </div>
+    </div>
+</body>
+</html>
