@@ -1,11 +1,29 @@
-from flask import Flask, request, render_template, url_for, redirect
+from flask import Flask, request, render_template, url_for, redirect, make_response
 import json
 import os
+import datetime
 
 app = Flask(__name__)
 
 # 팀원 정보를 저장할 JSON 파일 경로
 TEAM_JSON_FILE = 'team.json'
+# 방문자 데이터를 저장할 파일 경로
+VISITS_FILE = 'visits.txt'
+
+def load_visits():
+    """visits.txt 파일에서 방문자 데이터를 불러옵니다."""
+    if not os.path.exists(VISITS_FILE):
+        return {"total_visits": 0, "today_date": datetime.date.today().isoformat(), "today_visits": 0}
+    try:
+        with open(VISITS_FILE, 'r', encoding='utf-8') as f:
+            return json.load(f)
+    except (json.JSONDecodeError, FileNotFoundError):
+        return {"total_visits": 0, "today_date": datetime.date.today().isoformat(), "today_visits": 0}
+
+def save_visits(data):
+    """방문자 데이터를 visits.txt 파일에 저장합니다."""
+    with open(VISITS_FILE, 'w', encoding='utf-8') as f:
+        json.dump(data, f, indent=4)
 
 def load_members():
     """team.json 파일에서 팀원 목록을 불러옵니다."""
@@ -30,7 +48,48 @@ def index():
     team_members = load_members()
     # 팀장을 항상 맨 위로 정렬
     team_members.sort(key=lambda x: x['role'] != '팀장')
-    return render_template('index.html', teamMembers=team_members)
+
+    ## 방문자 카운터 로직
+    visits_data = load_visits()
+    today = datetime.date.today().isoformat()
+    
+    ## 2. 날짜가 바뀌었는지 확인 (자정이 지나면 오늘 방문자 수 초기화)
+    if visits_data['today_date'] != today:
+        visits_data['today_date'] = today
+        visits_data['today_visits'] = 0
+    
+    ## 3. 'visited_today' 쿠키 확인 (오늘 처음 방문했는지)
+    # 쿠키가 없으면 is_first_visit_today = True
+    is_first_visit_today = not request.cookies.get('visited_today')
+
+    if is_first_visit_today:
+        # 처음 방문했을 때만 전체 및 오늘 카운터 증가
+        visits_data['total_visits'] += 1
+        visits_data['today_visits'] += 1
+        save_visits(visits_data) # 파일에 데이터 저장
+
+    ## 4. 응답 객체 생성 및 템플릿 렌더링
+    # make_response를 사용하여 응답 객체를 만든 후, 쿠키를 추가해야 합니다.
+    response = make_response(render_template(
+        'index.html', 
+        teamMembers=team_members,
+        totalVisits=visits_data['total_visits'],  # 전체 방문자 수
+        todayVisits=visits_data['today_visits']   # 오늘 방문자 수
+        # 만약 테마 기능도 구현했다면, 여기에 currentTheme도 추가해야 합니다.
+    ))
+    
+    ## 5. 오늘 방문했음을 나타내는 쿠키 설정 (자정까지 유지)
+    if is_first_visit_today:
+        # 오늘 날짜의 23:59:59에 만료되도록 만료 시간 설정
+        midnight = datetime.datetime.combine(
+            datetime.date.today() + datetime.timedelta(days=1), datetime.time(0, 0)
+        )
+        expires_at = midnight.timestamp()
+        
+        # 'visited_today'라는 이름의 쿠키를 자정까지 유효하게 설정
+        response.set_cookie('visited_today', 'yes', expires=expires_at)
+        
+    return response
 
 # 2. '/input' (입력 페이지) 
 @app.route('/input')

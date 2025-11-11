@@ -18,6 +18,11 @@
 
     <h1>05-sosprac 팀 소개</h1>
 
+    <div class="visitor-stats">
+        <p>오늘 방문자 수: <strong>{{ todayVisits }}</strong> 명</p>
+        <p>전체 방문자 수: <strong>{{ totalVisits }}</strong> 명</p>
+    </div>
+
     <div class="card-container">
         
         <div class="card" style="cursor: pointer;" onclick="window.open('{{ url_for('kimjihun') }}', '_blank')" >
