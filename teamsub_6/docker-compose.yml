@@ -4,4 +4,4 @@ services:
     build: .
     image: team_proj-image    
     ports:
-      - "8000:8000"
+      - "8000:80"
