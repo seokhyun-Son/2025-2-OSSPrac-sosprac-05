@@ -1,3 +1,3 @@
 FROM tiangolo/uwsgi-nginx-flask:latest
 COPY . /app
-CMD ["python", "main.py"]
+
